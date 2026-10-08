@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#171923">
+<meta name="description" content="مخطط شخصي للاستعداد لبكالوريا شعبة الرياضيات">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>خطة البكالوريا — رياضيات</title>
+<style>
+:root{color-scheme:dark;--bg:#101116;--panel:#191b24;--panel2:#222531;--line:#303342;--text:#f4f4f7;--muted:#a8abba;--accent:#b9a2ff;--ok:#83d6ad;--warn:#f2c879}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;line-height:1.55}
+.wrap{max-width:850px;margin:auto;padding:14px 14px 40px}header{padding:16px 0 12px;position:sticky;top:0;z-index:3;background:#101116ed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+h1{font-size:1.15rem;margin:0}.sub{font-size:.82rem;color:var(--muted);margin-top:3px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px}.progress{font-size:1.4rem;font-weight:750;white-space:nowrap}.bar{height:7px;background:var(--panel2);border-radius:20px;overflow:hidden;margin-top:10px}.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+nav{display:flex;gap:7px;overflow:auto;padding:12px 0}nav button,.btn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:9px 12px;border-radius:12px;white-space:nowrap;font:inherit;font-size:.88rem;cursor:pointer}nav button.active{background:var(--accent);color:#171323;border-color:var(--accent);font-weight:700}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:15px;margin:10px 0}.section-title{font-size:1rem;margin:0 0 10px}.muted{color:var(--muted);font-size:.86rem}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:var(--panel2);padding:10px;border-radius:12px}.stat b{display:block;font-size:1.15rem}.stat span{font-size:.76rem;color:var(--muted)}
+.dayhead{display:flex;align-items:center;gap:9px;justify-content:space-between}.dayhead h2{font-size:1rem;margin:0}.pill{font-size:.75rem;background:var(--panel2);padding:3px 9px;border-radius:20px;color:var(--muted)}
+.session{display:grid;grid-template-columns:25px 104px 1fr;gap:9px;align-items:start;padding:12px 0;border-top:1px solid var(--line)}.session:first-of-type{margin-top:8px}.session input{width:20px;height:20px;accent-color:var(--accent);margin-top:3px}.time{font-size:.8rem;color:var(--accent);font-weight:700;direction:ltr;text-align:right}.task{font-size:.9rem}.task small{display:block;color:var(--muted);font-size:.78rem;margin-top:3px}.session.done .task{text-decoration:line-through;color:#9295a3}
+.subjects{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.subject{padding:10px;background:var(--panel2);border-radius:12px}.subject strong{font-size:.9rem}.subject .bar{margin-top:7px}.subject small{font-size:.75rem;color:var(--muted)}
+table{border-collapse:collapse;width:100%;font-size:.85rem}td,th{text-align:right;padding:9px 6px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:600}
+input[type=text],input[type=date],textarea,select{background:var(--panel2);border:1px solid var(--line);border-radius:10px;color:var(--text);padding:10px;font:inherit;width:100%}.formrow{display:flex;gap:8px}.formrow>*{flex:1}
+footer{font-size:.76rem;color:var(--muted);text-align:center;padding:18px 0}.hidden{display:none!important}
+@media(max-width:500px){.session{grid-template-columns:24px 82px 1fr;gap:7px}.time{font-size:.75rem}.task{font-size:.84rem}.stats{grid-template-columns:repeat(3,1fr)}.stat{padding:8px}.stat b{font-size:1rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="top"><div><h1>خطة البكالوريا — شعبة الرياضيات</h1><div class="sub">السنة الثالثة ثانوي · خطة مرنة حول مواقيت الثانوية</div></div><div class="progress" id="percent">0%</div></div><div class="bar"><i id="overall"></i></div></header>
+<nav id="tabs">
+<button class="active" data-view="week">الخطة الأسبوعية</button><button data-view="subjects">المواد والتقدم</button><button data-view="school">مواقيت الثانوية</button><button data-view="notes">ملاحظاتي</button>
+</nav>
+<main>
+<section id="week">
+<div class="card"><h2 class="section-title">إنجاز الأسبوع</h2><div class="stats"><div class="stat"><b id="doneCount">0/0</b><span>حصة منجزة</span></div><div class="stat"><b id="hours">0 س</b><span>ساعات مخططة</span></div><div class="stat"><b id="leftCount">0</b><span>حصة متبقية</span></div></div><p class="muted">اختاري مربع الحصة بعد إتمامها. اتركي وقتًا للطعام والصلاة والراحة، وخففي الخطة عند الإرهاق.</p></div>
+<div id="days"></div>
+<div class="card"><button class="btn" id="reset">إعادة تعيين إنجاز الأسبوع</button></div>
+</section>
+<section id="subjects" class="hidden">
+<div class="card"><h2 class="section-title">التقدم حسب المادة</h2><div id="subjectProgress" class="subjects"></div></div>
+<div class="card"><h2 class="section-title">أهداف هذا الأسبوع</h2><ul><li>الرياضيات: فهم الدرس ثم حل تمارين متدرجة وموضوع سابق.</li><li>الفيزياء: تلخيص القوانين والتدرب على تطبيقاتها.</li><li>علوم الطبيعة: فهم المخططات والمصطلحات والتدرب على تحليل الوثائق.</li><li>اللغات والفلسفة: حصص قصيرة متكررة بدل تركها لنهاية الأسبوع.</li><li>الجمعة: اختبار وتصحيح الأخطاء وتحديد أولويات الأسبوع المقبل.</li></ul></div>
+</section>
+<section id="school" class="hidden">
+<div class="card"><h2 class="section-title">مواقيت الثانوية المعتمدة</h2><p class="muted">هذه الساعات محجوزة للثانوية، وليست ضمن ساعات المراجعة المنزلية.</p><table><thead><tr><th>اليوم</th><th>الفترة الصباحية</th><th>الفترة المسائية</th></tr></thead><tbody>
+<tr><td>السبت</td><td>09:00–12:00 تقريبًا</td><td>13:00–17:00 تقريبًا</td></tr>
+<tr><td>الأحد</td><td>08:00–12:00</td><td>13:30–17:30</td></tr>
+<tr><td>الاثنين</td><td>08:00–12:00</td><td>13:30–15:30</td></tr>
+<tr><td>الثلاثاء</td><td>08:00–12:00</td><td>لا توجد دراسة حسب الجدول الحالي</td></tr>
+<tr><td>الأربعاء</td><td>08:00–12:00</td><td>13:30–16:30</td></tr>
+<tr><td>الخميس</td><td>08:00–12:00</td><td>13:30–15:30</td></tr>
+<tr><td>الجمعة</td><td>لا توجد ثانوية</td><td>مراجعة وراحة ووقت للصلاة والقرآن</td></tr>
+</tbody></table><p class="muted">ملاحظة: أوقات السبت الصباحية والمسائية تقريبية من المعلومات المتاحة؛ عدّليها إذا كانت فتراتك الرسمية مختلفة. الوصول للمنزل عادةً 18:30–19:00.</p></div>
+</section>
+<section id="notes" class="hidden">
+<div class="card"><h2 class="section-title">ملاحظاتك وأهدافك</h2><label class="muted" for="note">اكتبي الدروس الصعبة أو أهداف الأسبوع القادم</label><textarea id="note" rows="7" placeholder="مثال: مراجعة النهايات، إعادة تمرين في الكهرباء..."></textarea><p class="muted">تُحفظ الملاحظات على هذا الهاتف والمتصفح.</p><button class="btn" id="clearNote">مسح الملاحظات</button></div>
+</section>
+</main>
+<footer>خطة قابلة للتعديل · الاستمرارية أهم من الكمال</footer>
+</div>
+<script>
+const subjects={math:{name:"الرياضيات",hours:7},phy:{name:"الفيزياء",hours:4},snv:{name:"علوم الطبيعة",hours:2},phi:{name:"الفلسفة",hours:1.5},ar:{name:"اللغة العربية",hours:1.5},fr:{name:"الفرنسية",hours:1.5},en:{name:"الإنجليزية",hours:1.5},rev:{name:"تصحيح ومراجعة",hours:2}};
+const days=[["sat","السبت"],["sun","الأحد"],["mon","الاثنين"],["tue","الثلاثاء"],["wed","الأربعاء"],["thu","الخميس"],["fri","الجمعة"]];
+const sessions=[
+["sat","19:45–20:30","en","مفردات وقواعد قصيرة",.75],
+["sun","18:15–19:15","math","مراجعة درس اليوم وحل تمارين أساسية",1],
+["sun","20:15–21:00","fr","فهم نص وقواعد",.75],
+["mon","16:15–17:15","phy","مراجعة درس الثانوية وتمارين تطبيقية",1],
+["mon","19:45–20:30","ar","نص أدبي أو بلاغة",.75],
+["tue","14:00–15:30","math","حصة تركيز: درس وتمارين متدرجة",1.5],
+["tue","16:00–17:00","phy","تمارين تطبيقية على درس الأسبوع",1],
+["tue","19:30–20:15","en","قواعد وفهم مكتوب",.75],
+["wed","17:15–18:00","snv","مراجعة الدرس وتحليل وثيقة",.75],
+["wed","19:45–20:30","math","تمارين قصيرة وتثبيت الأفكار",.75],
+["thu","16:15–17:15","math","موضوع بكالوريا جزئي دون مساعدة",1],
+["thu","19:45–20:30","phi","خطة مقالة أو تحليل نص",.75],
+["fri","09:00–11:00","math","اختبار أو موضوع بكالوريا بالتوقيت",2],
+["fri","11:15–12:00","phy","تطبيقات قصيرة",.75],
+["fri","14:00–15:00","snv","تمارين وتحليل وثائق",1],
+["fri","15:15–16:15","rev","تصحيح الأخطاء وتسجيلها",1],
+["fri","16:30–17:00","phi","مراجعة خفيفة أو بطاقات مفاهيم",.5],
+["fri","20:00–20:30","ar","قراءة خفيفة أو مراجعة أسبوعية",.5]
+];
+const STORE="bac-math-planner-v1";
+let state={done:[],note:""};
+try{state={...state,...JSON.parse(localStorage.getItem(STORE)||"{}")}}catch(e){}
+function save(){localStorage.setItem(STORE,JSON.stringify(state))}
+function esc(s){return s.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function render(){
+let total=sessions.length, done=state.done.length, pct=Math.round(done/total*100), hours=sessions.reduce((a,s)=>a+s[4],0);
+document.getElementById("percent").textContent=pct+"%";document.getElementById("overall").style.width=pct+"%";
+document.getElementById("doneCount").textContent=done+"/"+total;document.getElementById("hours").textContent=hours.toLocaleString("ar-DZ")+" س";document.getElementById("leftCount").textContent=total-done;
+document.getElementById("days").innerHTML=days.map(([key,name])=>{let list=sessions.map((s,i)=>({...{s,i}})).filter(x=>x.s[0]===key);return `<div class="card"><div class="dayhead"><h2>${name}</h2><span class="pill">${list.filter(x=>state.done.includes(x.i)).length}/${list.length} حصص</span></div>${list.map(({s,i})=>`<label class="session ${state.done.includes(i)?"done":""}"><input type="checkbox" data-index="${i}" ${state.done.includes(i)?"checked":""}><span class="time">${s[1]}</span><span class="task">${subjects[s[2]].name}<small>${s[3]} · ${s[4]} س</small></span></label>`).join("")}</div>`}).join("");
+document.querySelectorAll("[data-index]").forEach(el=>el.addEventListener("change",e=>{let i=+e.target.dataset.index;if(e.target.checked&&!state.done.includes(i))state.done.push(i);else state.done=state.done.filter(n=>n!==i);save();render()}));
+document.getElementById("subjectProgress").innerHTML=Object.entries(subjects).map(([key,v])=>{let planned=sessions.filter(s=>s[2]===key).reduce((a,s)=>a+s[4],0), completed=sessions.reduce((a,s,i)=>a+(s[2]===key&&state.done.includes(i)?s[4]:0),0), p=planned?Math.round(completed/planned*100):0;return `<div class="subject"><strong>${v.name}</strong><div><small>${completed} / ${planned} ساعة</small></div><div class="bar"><i style="width:${p}%;background:var(--accent)"></i></div></div>`}).join("");
+document.getElementById("note").value=state.note||"";
+}
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("active",x===b));["week","subjects","school","notes"].forEach(id=>document.getElementById(id).classList.toggle("hidden",id!==b.dataset.view))}));
+document.getElementById("reset").addEventListener("click",()=>{if(confirm("هل تريدين تصفير إنجازات الأسبوع؟")){state.done=[];save();render()}});
+document.getElementById("note").addEventListener("input",e=>{state.note=e.target.value;save()});
+document.getElementById("clearNote").addEventListener("click",()=>{state.note="";save();render()});
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
+render();
+</script>
+</body></html>

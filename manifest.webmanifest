@@ -1,0 +1,16 @@
+{
+  "id": "./",
+  "name": "خطة البكالوريا — رياضيات",
+  "short_name": "خطة البكالوريا",
+  "description": "مخطط أسبوعي للاستعداد لبكالوريا شعبة الرياضيات",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#101116",
+  "theme_color": "#171923",
+  "icons": [
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
