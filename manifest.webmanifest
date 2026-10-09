@@ -1,16 +1,19 @@
 {
   "id": "./",
-  "name": "خطة البكالوريا — رياضيات",
+  "name": "خطة البكالوريا — شعبة الرياضيات",
   "short_name": "خطة البكالوريا",
-  "description": "مخطط أسبوعي للاستعداد لبكالوريا شعبة الرياضيات",
-  "lang": "ar",
+  "description": "مخطط مرن للدراسة والتحضير لبكالوريا الجزائر شعبة الرياضيات",
+  "lang": "ar-DZ",
   "dir": "rtl",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#101116",
-  "theme_color": "#171923",
+  "orientation": "portrait-primary",
+  "background_color": "#f6f5fa",
+  "theme_color": "#7560ad",
   "icons": [
-    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"},
+    {"src":"icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
   ]
 }
